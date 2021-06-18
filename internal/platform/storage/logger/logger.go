@@ -19,7 +19,7 @@ func (r *InputRequest) Marshal() ([]byte, error) {
 type InputRequest struct {
 	Message    *string       `json:"message,omitempty"`
 	Additional []interface{} `json:"additional,omitempty"`
-	Level      *string       `json:"level,omitempty"`
+	Level      *int64        `json:"level,omitempty"`
 	Timestamp  *string       `json:"timestamp,omitempty"`
 	FileName   *string       `json:"fileName,omitempty"`
 	LineNumber *string       `json:"lineNumber,omitempty"`
