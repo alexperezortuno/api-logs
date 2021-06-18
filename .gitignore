@@ -1,0 +1,6 @@
+.idea
+*.log
+*-linux-amd64
+*-windows-amd64
+*-windows-386
+*-darwin-amd64
