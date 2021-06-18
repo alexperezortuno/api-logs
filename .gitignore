@@ -4,3 +4,4 @@
 *-windows-amd64
 *-windows-386
 *-darwin-amd64
+go.sum
