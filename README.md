@@ -40,3 +40,43 @@ $ env GOOS=linux GOARCH=amd64 go build -o logs-linx-amd64 cmd/api/main.go
 |solaris|	amd64|
 |windows|	386|
 |windows|	amd64|
+
+### Create a Daemon
+
+```shell
+$ sudo touch /lib/systemd/system/apilog.service
+```
+Edit this file
+```shell
+$ sudo nano /lib/systemd/system/apilog.service
+```
+
+put this into a file
+
+```shell
+[Unit]
+Description=apilog
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=30s
+Environment=PORT=8080
+ExecStart=/path/to/file/apilog-linux-amd64
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Now you can use this commands
+```shell
+$ systemctl list-units
+$ systemctl is-active apilog.service
+$ systemctl is-enabled apilog.service
+$ systemctl is-failed apilog.service
+$ sudo systemctl start apilog.service
+$ sudo systemctl stop apilog.service
+$ sudo systemctl enable apilog.service
+$ sudo systemctl disable apilog.service
+$ sudo systemctl status apilog.service
+```

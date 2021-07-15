@@ -14,13 +14,13 @@ type Server struct {
 	engine   *gin.Engine
 }
 
-func New(host string, port uint, prefix string) Server {
+func New(host string, port uint, context string) Server {
 	srv := Server{
 		engine:   gin.New(),
 		httpAddr: fmt.Sprintf("%s:%d", host, port),
 	}
 
-	srv.registerRoutes(prefix)
+	srv.registerRoutes(context)
 	return srv
 }
 
@@ -29,9 +29,9 @@ func (s *Server) Run() error {
 	return s.engine.Run(s.httpAddr)
 }
 
-func (s *Server) registerRoutes(prefix string) {
+func (s *Server) registerRoutes(context string) {
 	s.engine.Use(logging.Middleware())
 
-	s.engine.GET(fmt.Sprintf("/%s/%s", prefix, "/health"), health.CheckHandler())
-	s.engine.POST(fmt.Sprintf("/%s/%s", prefix, "/log"), logger.CreateHandler())
+	s.engine.GET(fmt.Sprintf("/%s/%s", context, "/health"), health.CheckHandler())
+	s.engine.POST(fmt.Sprintf("/%s/%s", context, "/log"), logger.CreateHandler())
 }

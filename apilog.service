@@ -1,0 +1,11 @@
+[Unit]
+Description=apilog
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=30s
+ExecStart=/path/to/file/apilog-linux-amd64
+
+[Install]
+WantedBy=multi-user.target
