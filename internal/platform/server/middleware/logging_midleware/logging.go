@@ -1,4 +1,4 @@
-package logging
+package logging_midleware
 
 import (
 	"fmt"

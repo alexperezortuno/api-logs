@@ -26,7 +26,13 @@ type InputRequest struct {
 }
 
 func LogRequest(p InputRequest) {
-	f, err := os.OpenFile("logfile.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	logPath := os.Getenv("APP_LOG_PATH")
+
+	if logPath == "" {
+		logPath = "/tmp/apilog.log"
+	}
+
+	f, err := os.OpenFile(logPath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 
 	if err != nil {
 		log.Fatalf("error opening file: %v", err)

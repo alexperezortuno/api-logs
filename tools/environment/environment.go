@@ -33,7 +33,7 @@ func Server() ServerValues {
 
 	if err != nil {
 		log.Printf("error parsing port")
-		port = 8085
+		port = 8185
 	}
 
 	if host == "" {
