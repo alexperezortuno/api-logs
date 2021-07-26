@@ -33,14 +33,19 @@ var cpuTemp = prometheus.NewGauge(prometheus.GaugeOpts{
 	Help: "Current temperature of the CPU.",
 })
 
-//func recordMetrics() {
-//    go func() {
-//        for {
-//            opsProcessed.Inc()
-//            time.Sleep(2 * time.Second)
-//        }
-//    }()
-//}
+//var cli = prometheus.NewHistogramVec(prometheus.HistogramOpts{
+//    Namespace: "pushgateway",
+//    Name:      "cmd_duration_seconds",
+//    Help:      "CLI application execution in seconds",
+//    Buckets:   prometheus.DefBuckets,
+//}, []string{"name"})
+//
+//var http = prometheus.NewHistogramVec(prometheus.HistogramOpts{
+//    Namespace: "http",
+//    Name:      "request_duration_seconds",
+//    Help:      "The latency of the HTTP requests.",
+//    Buckets:   prometheus.DefBuckets,
+//}, []string{"handler", "method", "code"})
 
 var (
 	opsProcessed = promauto.NewCounter(prometheus.CounterOpts{

@@ -35,6 +35,8 @@ func (s *Server) Run() error {
 func (s *Server) registerRoutes(context string) {
 	s.engine.Use(logging_midleware.Middleware())
 	s.engine.Use(prometheus_midleware.Middleware())
+	s.engine.Use(gin.Logger())
+	s.engine.Use(gin.Recovery())
 
 	s.engine.GET(fmt.Sprintf("/%s/%s", context, "/health"), health.CheckHandler())
 	s.engine.POST(fmt.Sprintf("/%s/%s", context, "/log"), logger.CreateHandler())

@@ -5,6 +5,7 @@ Description=apilog
 Type=simple
 Restart=always
 RestartSec=30s
+Environment=APP_PORT=8081
 ExecStart=/path/to/file/apilog-linux-amd64
 
 [Install]

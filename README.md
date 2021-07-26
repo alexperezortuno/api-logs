@@ -4,8 +4,16 @@ Save logs from angular app
 
 ### Build
 ```
-$ env GOOS=linux GOARCH=amd64 go build -o logs-linx-amd64 cmd/api/main.go
+$ env GOOS=linux GOARCH=amd64 go build -o logs-linux-amd64 cmd/api/main.go
 ```
+
+### Using Shell Script
+```shell
+$ ./go-executable-build.bash -o api_logs -p cmd/api/main.go
+# select one architecture
+$ ./go-executable-build.bash -o api_logs -p cmd/api/main.go
+```
+
 
 ####
 |GOOS - Target Operating System	|GOARCH - Target Platform|
