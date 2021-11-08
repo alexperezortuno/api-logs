@@ -13,10 +13,6 @@ type ServerValues struct {
 	Context string
 }
 
-func EnvVariable(key string) string {
-	return os.Getenv(key)
-}
-
 func env() {
 	env := os.Getenv("APP_ENV")
 

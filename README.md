@@ -11,7 +11,7 @@ $ env GOOS=linux GOARCH=amd64 go build -o logs-linux-amd64 cmd/api/main.go
 ```shell
 $ ./go-executable-build.bash -o api_logs -p cmd/api/main.go
 # select one architecture
-$ ./go-executable-build.bash -o api_logs -p cmd/api/main.go
+$ ./go-executable-build.bash -o api_logs -p cmd/api/main.go -a linux/amd64
 ```
 
 

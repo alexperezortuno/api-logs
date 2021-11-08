@@ -19,10 +19,12 @@ func (r *InputRequest) Marshal() ([]byte, error) {
 type InputRequest struct {
 	Message    *string       `json:"message,omitempty"`
 	Additional []interface{} `json:"additional,omitempty"`
-	Level      *string       `json:"level,omitempty"`
-	Timestamp  *string       `json:"timestamp,omitempty"`
-	FileName   *string       `json:"fileName,omitempty"`
-	LineNumber *string       `json:"lineNumber,omitempty"`
+	Level      *int32        `json:"level,omitempty"`
+	//Level      *string       `json:"level,omitempty"`
+	Timestamp *string `json:"timestamp,omitempty"`
+	FileName  *string `json:"fileName,omitempty"`
+	//LineNumber *string       `json:"lineNumber,omitempty"`
+	LineNumber *int32 `json:"lineNumber,omitempty"`
 }
 
 func LogRequest(p InputRequest) {
@@ -30,6 +32,14 @@ func LogRequest(p InputRequest) {
 
 	if logPath == "" {
 		logPath = "/tmp/apilog.log"
+	}
+
+	if _, err := os.Stat(logPath); os.IsNotExist(err) {
+		err := os.MkdirAll(logPath, 0700)
+
+		if err != nil {
+			return
+		}
 	}
 
 	f, err := os.OpenFile(logPath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)

@@ -29,7 +29,8 @@ func New(host string, port uint, context string) Server {
 
 func (s *Server) Run() error {
 	log.Println("Server running on", s.httpAddr)
-	return s.engine.Run(s.httpAddr)
+	//return s.engine.Run(s.httpAddr)
+	return s.engine.RunTLS(s.httpAddr, "/media/hdca/Workspace/Builds/api-logs.pem", "/media/hdca/Workspace/Builds/api-logs-key.pem")
 }
 
 func (s *Server) registerRoutes(context string) {
