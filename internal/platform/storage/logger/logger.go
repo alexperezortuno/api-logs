@@ -2,6 +2,8 @@ package logger
 
 import (
 	"encoding/json"
+	"fmt"
+	"github.com/pkg/errors"
 	"log"
 	"os"
 )
@@ -29,9 +31,10 @@ type InputRequest struct {
 
 func LogRequest(p InputRequest) {
 	logPath := os.Getenv("APP_LOG_PATH")
+	var f *os.File
 
 	if logPath == "" {
-		logPath = "/tmp/apilog.log"
+		logPath = "/tmp"
 	}
 
 	if _, err := os.Stat(logPath); os.IsNotExist(err) {
@@ -42,7 +45,20 @@ func LogRequest(p InputRequest) {
 		}
 	}
 
-	f, err := os.OpenFile(logPath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if _, err := os.Stat(fmt.Sprintf("%s/apilog.log", logPath)); err == nil {
+		log.Println("Ok!, log file exist")
+	} else if errors.Is(err, os.ErrNotExist) {
+		log.Printf("log file not exist: %v", err)
+		f, err := os.Create(fmt.Sprintf("%s/apilog.log", logPath))
+
+		if err != nil {
+			log.Fatalf("error creating file: %v", err)
+		}
+
+		defer f.Close()
+	}
+
+	f, err := os.OpenFile(fmt.Sprintf("%s/apilog.log", logPath), os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 
 	if err != nil {
 		log.Fatalf("error opening file: %v", err)
